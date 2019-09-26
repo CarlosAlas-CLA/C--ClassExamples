@@ -1,13 +1,12 @@
-﻿
+
 using System;
 using System.Data.SqlClient;
 using System.IO;
 
 
-
 namespace TestCodeLibrary
     {
-     {
+     
 class Program
         {
         static void Main(string[] args)
@@ -34,8 +33,8 @@ class Program
             string vUserName = "";
             string vPassword = "";
             SqlCommand sqlCommand = new SqlCommand();
-            string vSQLCmdMD = "";
-            string vSQLCmdNY = "";
+            string vSQLCmd1 = "select *from dbo.test";
+            string vSQLCmd2 = "select *from dbo.test";
             //SMTP variables 
             string vFromEmail = "";
             string[] vToList = { "" };
@@ -57,7 +56,7 @@ class Program
                 //Sql connection time
                 sqlCommand.CommandTimeout = 600;
                 // Create excel file
-                SQL.SqlToExcel(vLogPath, vOutputPath + vFileName + vFileType, vSheetName, vSQLServer, vDBName, vUserName, vPassword, vSQLCmdMD);
+                SQL.SqlToExcel(vLogPath, vOutputPath + vFileName + vFileType, vSheetName, vSQLServer, vDBName, vUserName, vPassword, vSQLCmd1);
 
                 if (File.Exists(vOutputPath + vFileName + vFileType))
                     {
@@ -68,7 +67,7 @@ class Program
                 //Copy to archive
                 File.Copy(vOutputPath + vFileName + vFileType, vArchivePathMD + vFileName + vToday + vFileId + vFileType);
                 // Create excel file
-                SQL.SqlToExcel(vLogPath, vOutputPath + vFileName + vFileType, vSheetName, vSQLServer, vDBName, vUserName, vPassword, vSQLCmdNY);
+                SQL.SqlToExcel(vLogPath, vOutputPath + vFileName + vFileType, vSheetName, vSQLServer, vDBName, vUserName, vPassword, vSQLCmd2);
                 if (File.Exists(vOutputPath + vFileName + vFileType))
                     {
                     //Send report email
