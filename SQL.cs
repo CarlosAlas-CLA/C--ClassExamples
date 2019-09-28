@@ -8,7 +8,7 @@ namespace TestCodeLibrary
     {
  class SQL
         {
-        public static void SqlToExcel(string vLogPath, string vOutputPath , string vSheetName, string vSQLServer, string vDBName, string vUserName,string  vPassword, string vSQLCmdMD) {
+      public static void SqlToExcel(string vLogPath,string vOutputPath, string vFileName , string vFileType, string vSQLConnectionString, string vSQLCmd) {
             }
     
         }
