@@ -65,7 +65,7 @@ class Program
                     SendEmails.SendReports(vProgramName, vProgramDir, vLogPath, vFromEmail, vToList,  vBCCList, vCCList, vSubject, vMailBody, new[] { vOutputPath + vFileName + vFileType });
                     }
                 //Copy to archive
-                File.Copy(vOutputPath + vFileName + vFileType, vArchivePathMD + vFileName + vToday + vFileId + vFileType);
+                File.Copy(vOutputPath + vFileName + vFileType, vArchivePath0 + vFileName + vToday + vFileId + vFileType);
                 // Create excel file
                 SQL.SqlToExcel(vLogPath, vOutputPath + vFileName + vFileType, vSheetName, vSQLServer, vDBName, vUserName, vPassword, vSQLCmd1);
                 if (File.Exists(vOutputPath + vFileName + vFileType))
@@ -73,7 +73,7 @@ class Program
                     //Send report email
                     SendEmails.SendReports(vProgramName, vProgramDir, vLogPath, vFromEmail, vToList, vBCCList, vCCList, vSubject, vMailBody, new[] { vOutputPath + vFileName + vFileType });
                     }   //Copy to archive
-                File.Copy(vOutputPath + vFileName + vFileType, vArchivePathNY + vFileName + vToday + vFileId + vFileType);
+                File.Copy(vOutputPath + vFileName + vFileType, vArchivePath1 + vFileName + vToday + vFileId + vFileType);
                 sqlConnection.Close();
                 GC.Collect();
                 }
