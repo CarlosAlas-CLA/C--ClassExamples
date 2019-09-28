@@ -14,8 +14,8 @@ class Program
             string vProgramName = @"SendReports";
             string vProgramDir = @"\C:\Users\Desktop\GLDataTest";
             string vOutputPath = @"C:\Users\Desktop\GLDataTest\Output\";
-            string vArchivePathMD = @"C:\Users\Desktop\GLDataTest\Archive0\";
-            string vArchivePathNY = @"C:\Users\Desktop\GLDataTest\Archive1\";
+            string vArchivePath0 = @"C:\Users\Desktop\GLDataTest\Archive0\";
+            string vArchivePath1 = @"C:\Users\Desktop\GLDataTest\Archive1\";
             string vToday = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff");
             string vLogPath = @"C:\Users\Desktop\GLDataTest\log.txt";
             string vSheetName = "Daily Invoice";
@@ -33,8 +33,8 @@ class Program
             string vUserName = "";
             string vPassword = "";
             SqlCommand sqlCommand = new SqlCommand();
+            string vSQLCmd0 = "select *from dbo.test";
             string vSQLCmd1 = "select *from dbo.test";
-            string vSQLCmd2 = "select *from dbo.test";
             //SMTP variables 
             string vFromEmail = "";
             string[] vToList = { "" };
@@ -56,7 +56,7 @@ class Program
                 //Sql connection time
                 sqlCommand.CommandTimeout = 600;
                 // Create excel file
-                SQL.SqlToExcel(vLogPath, vOutputPath + vFileName + vFileType, vSheetName, vSQLServer, vDBName, vUserName, vPassword, vSQLCmd1);
+                SQL.SqlToExcel(vLogPath, vOutputPath + vFileName + vFileType, vSheetName, vSQLServer, vDBName, vUserName, vPassword, vSQLCmd0);
 
                 if (File.Exists(vOutputPath + vFileName + vFileType))
                     {
@@ -67,7 +67,7 @@ class Program
                 //Copy to archive
                 File.Copy(vOutputPath + vFileName + vFileType, vArchivePathMD + vFileName + vToday + vFileId + vFileType);
                 // Create excel file
-                SQL.SqlToExcel(vLogPath, vOutputPath + vFileName + vFileType, vSheetName, vSQLServer, vDBName, vUserName, vPassword, vSQLCmd2);
+                SQL.SqlToExcel(vLogPath, vOutputPath + vFileName + vFileType, vSheetName, vSQLServer, vDBName, vUserName, vPassword, vSQLCmd1);
                 if (File.Exists(vOutputPath + vFileName + vFileType))
                     {
                     //Send report email
