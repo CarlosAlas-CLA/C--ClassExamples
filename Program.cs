@@ -81,7 +81,9 @@ class Program
                 {
                 //Send exception email
                 SendEmails.SendExceptionOccur(vProgramName, vProgramDir, vLogPath, ex.HelpLink, ex.Message, ex.GetType().ToString(), ex.TargetSite.ToString());
-                }
+                File.AppendAllText(vLogPath, "\n*******************************" + vToday + "\n" + ex.TargetSite + "\n " + ex.Message + "\n" + ex.Data + "\n" + ex.StackTrace + "\n*******************************");
+
+            }
             }
         }
     }
