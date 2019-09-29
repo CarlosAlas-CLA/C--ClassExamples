@@ -40,7 +40,7 @@ class Program
             string[] vBCCList = { "" };
             String vSubject = "Daily Reports" + vToday;
             String vMailBody = "Greetings," + "\n" + "     Report for the last week is attached." + "\n" + "\n" + "Thank you," + "\n" + "CLA" + "\n" + "\n" + "\n" + "\n" + "\n" + "{CLA}";
-            try
+        try
                 { // Clear Output Folder
                 //vPathsToBeClear = Directory.GetFiles(vOutputPath);
                 //foreach (string filePath in vPathsToBeClear)
@@ -50,21 +50,23 @@ class Program
            
                 // Create excel file
                 SQL.SqlToExcel( vOutputPath , vFileName ,vFileType,vSheetName, vSQLConnectionString, vSQLCmd1);
-                //if (File.Exists(vOutputPath + vFileName + vFileType))
-                    {
-                    //Send report email
-                    SendEmails.SendReports(vProgramName,  vFromEmail, vToList, vBCCList, vCCList, vSubject, vMailBody, new[] { vOutputPath + vFileName + vFileType });
-                    }
                 //Copy to archive
                 File.Copy(vOutputPath + vFileName + vFileType, vArchivePath0 + vFileName + vToday + vFileId + vFileType);
+                if (File.Exists( vArchivePath0 + vFileName + vToday + vFileId + vFileType))
+                {
+                //Send report email
+
+                SendEmails.SendReports(vProgramName,  vFromEmail, vToList, vBCCList, vCCList, vSubject, vMailBody, new[] { vArchivePath0 + vFileName + vToday + vFileId + vFileType });
+               }  
+
                 // Create excel file
-                SQL.SqlToExcel(vOutputPath, vFileName, vFileType, vSheetName, vSQLConnectionString, vSQLCmd2);
+             //   SQL.SqlToExcel(vOutputPath, vFileName, vFileType, vSheetName, vSQLConnectionString, vSQLCmd2);
                 //if (File.Exists(vOutputPath + vFileName + vFileType))
                 //    {
                 //    //Send report email
-                //    SendEmails.SendReports(vProgramName, vProgramDir, vLogPath, vFromEmail, vToList, vBCCList, vCCList, vSubject, vMailBody, new[] { vOutputPath + vFileName + vFileType });
+                //    SendEmails.SendReports(vProgramName, vProgramDir, vLogPath, vFromEmail, vToList, vBCCList, vCCList, vSubject, vMailBody, new[] { vArchivePath1 + vFileName + vToday + vFileId + vFileType});
                 ////    }   //Copy to archive
-             File.Copy(vOutputPath + vFileName + vFileType, vArchivePath1 + vFileName + vToday + vFileId + vFileType);
+                //  File.Copy(vOutputPath + vFileName + vFileType, vArchivePath1 + vFileName + vToday + vFileId + vFileType);
                 GC.Collect();
                 }
             catch (Exception ex)
